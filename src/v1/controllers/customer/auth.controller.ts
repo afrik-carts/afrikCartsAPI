@@ -37,7 +37,7 @@ export const register = async (req: Request, res: Response) => {
                         lastname: req.body.lastname
                     }
                 },
-                role: ROLE.VENDOR
+                role: ROLE.CUSTOMER
             }
         });
 
