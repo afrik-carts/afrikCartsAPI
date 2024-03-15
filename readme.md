@@ -13,13 +13,13 @@ List of needed services
 Rename .env.example to .env and fill in the required data in the .env file.
 
 ```bash
-DATABASE_URL="postgresql://postgres:username@localhost:5432/afrikcarts?schema=public"
+DATABASE_URL="postgresql://postgres:password@localhost:5432/afrikcarts?schema=public"
 PORT=5005
 APP_SECRET="$%secretkeyforjwttokendecode%$"
 GOOGLE_MAP_API_KEY=""
 ```
  make sure you input your own data in *GOOGLE_MAP_API_KEY* and *DATABASE_URL*. you can leave the *APP_SECRET* and *PORT* as it is.
- for *DATABASE_URL* after installing postgres you can just cahnge that username in the example url to your postgres username. do not set a password so that you can access it easily.
+ for *DATABASE_URL* after installing postgres you can just change that username in the example url to your postgres username. do not set a password so that you can access it easily.
 
 # installation
 

@@ -5,7 +5,7 @@ import { ROLE } from "@prisma/client";
 import prisma from "../../prisma.config.js";
 import { IAuthRequestUser } from "../types/global.types.js";
 
-const only_logistic = (req: Request, res: Response, next: NextFunction) => {
+const only_vendor = (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate('jwt', { session: false }, async (err: unknown, user: IAuthRequestUser) => {
         // validate passport user payload
         try {
@@ -40,4 +40,4 @@ const only_logistic = (req: Request, res: Response, next: NextFunction) => {
     })(req, res, next);
 }
 
-export default only_logistic;
+export default only_vendor;
