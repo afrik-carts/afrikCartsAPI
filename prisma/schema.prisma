@@ -55,8 +55,8 @@ model VendorAccount {
   user_id          Int                  @unique
   name             String
   description      String
-  opening_time     DateTime
-  closing_time     DateTime
+  opening_time     String               @db.VarChar(20)
+  closing_time     String               @db.VarChar(20)
   is_open_24hours  Boolean              @default(false)
   profile_image    String?              @db.VarChar(255)
   cover_image      String?              @db.VarChar(255)
