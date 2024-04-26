@@ -6,7 +6,7 @@ import vendorRoutes from "./vendor/index.routes.js"
 const router = express.Router();
 
 router.use('/customer', customerRoutes);
-router.use('/venor', vendorRoutes);
+router.use('/vendor', vendorRoutes);
 router.use('/admin', adminRoutes);
 
 export default router;
