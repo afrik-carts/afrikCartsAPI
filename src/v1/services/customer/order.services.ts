@@ -195,7 +195,7 @@ export async function addItemToCart(req: Request, body: IAddItemToCartSchema) {
                 quantity: quantity
             }
         });
-        return quantity;
+        return { quantity: quantity };
     } else {
         await prisma.cartItem.create({
             data: {
@@ -283,10 +283,11 @@ export async function placeOrder(req: Request, body: IPlaceOrder) {
                 where: { code: body.coupon_code }
             })
             if (getCoupon && ((new Date(`${getCoupon.expires_at}`)).getTime() > Date.now())) {
-                discounted_price = new Decimal((getCoupon.discount / 100) * total_price)
+                discounted_price = new Decimal((getCoupon.discount / 100) * total_price);
                 _coupon_id = getCoupon.id;
             }
         }
+
         const order_resp = await prisma.order.create({
             data: {
                 vendor_user_id: getCart.vendor_user_id,
@@ -298,16 +299,17 @@ export async function placeOrder(req: Request, body: IPlaceOrder) {
                 discounted_price: discounted_price,
                 status: ORDER_STATUS.PENDING
             }
-        })
+        });
+
         for (let i = 0; i < getCartItems.length; i++) {
             await prisma.orderItem.create({
                 data: {
                     order_id: order_resp.id,
-                    menu_id: getCartItems[i].menu_id, 
-                    name: getCartItems[i].name, 
-                    description: getCartItems[i].description, 
-                    price: getCartItems[i].price, 
-                    wait_time: getCartItems[i].wait_time, 
+                    menu_id: getCartItems[i].menu_id,
+                    name: getCartItems[i].name,
+                    description: getCartItems[i].description,
+                    price: getCartItems[i].price,
+                    wait_time: getCartItems[i].wait_time,
                     quantity: getCartItems[i].quantity
                 }
             })
@@ -335,11 +337,11 @@ export async function placeOrder(req: Request, body: IPlaceOrder) {
     }
 }
 
-export async function clearCart(req: Request) {
-    await prisma.cart.deleteMany({
+export async function clearCart(req: Request) {    
+    await prisma.cartItem.deleteMany({
         where: { customer_user_id: AuthUser(req).id }
     })
-    await prisma.cartItem.deleteMany({
+    await prisma.cart.deleteMany({
         where: { customer_user_id: AuthUser(req).id }
     })
     return "Cart cleared successfully";

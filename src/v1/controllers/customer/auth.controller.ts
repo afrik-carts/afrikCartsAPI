@@ -49,7 +49,7 @@ export const register = async (req: Request, res: Response) => {
         // @dev Create a wallet for the registered user
         await prisma.accountWallet.create({
             data: {
-                customer_user_id: createdAccount?.id
+                customer_user_id: createdUser.id
             }
         });
 
